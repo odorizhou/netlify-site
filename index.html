@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A site hosted on Netlify" />
+    <title>My site</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <p class="logo">My site</p>
+        <nav aria-label="Primary">
+          <a href="#main">Home</a>
+          <a href="#next">Next steps</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <h1>You're live on Netlify</h1>
+          <p class="lead">
+            This is a static starter you can replace with your own HTML, CSS, and assets.
+            Deploy by connecting this folder to Netlify from Git or drag-and-drop the
+            folder in the Netlify UI.
+          </p>
+          <p>
+            <a class="btn" href="https://docs.netlify.com/">Netlify docs</a>
+          </p>
+        </div>
+      </section>
+      <section id="next" class="panel">
+        <div class="wrap">
+          <h2>Next steps</h2>
+          <ol class="steps">
+            <li>
+              Put this project in a Git repository (GitHub, GitLab, or Bitbucket).
+            </li>
+            <li>
+              In Netlify: <strong>Add new site</strong> → Import from Git, pick the repo,
+              leave build command empty, set publish directory to the repo root (or this
+              folder if the repo is only this site).
+            </li>
+            <li>
+              Edit <code>index.html</code> and <code>css/styles.css</code> to match your
+              brand and content.
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Built for Netlify · <span id="year"></span></p>
+      </div>
+    </footer>
+    <script src="/js/main.js" defer></script>
+  </body>
+</html>
