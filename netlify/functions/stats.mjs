@@ -1,15 +1,14 @@
 const DEFAULT_TIMEOUT_MS = 15000;
 
 function json(statusCode, body) {
-  return {
-    statusCode,
+  return new Response(JSON.stringify(body), {
+    status: statusCode,
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       // Stats update infrequently; allow short CDN caching while keeping it reasonably fresh.
       "Cache-Control": "public, max-age=60, s-maxage=300",
     },
-    body: JSON.stringify(body),
-  };
+  });
 }
 
 function requireEnv(name) {
