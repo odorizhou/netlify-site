@@ -36,7 +36,13 @@ async function fetchWithTimeout(url, options = {}) {
 export default async (request) => {
   try {
     const url = new URL(request.url);
-    const botId = (url.searchParams.get("botId") || "").trim();
+    let botId = (url.searchParams.get("botId") || "").trim();
+    if (!botId) {
+      // Allow friendly path access without relying on query-string rewrites.
+      // Supports: /api/bots/<id>/stats
+      const match = url.pathname.match(/^\/api\/bots\/([^/]+)\/stats\/?$/);
+      if (match && match[1]) botId = decodeURIComponent(match[1]).trim();
+    }
     if (!botId) return json(400, { error: "Missing botId query parameter." });
 
     const repo = requireEnv("STATS_GITHUB_REPO"); // e.g. "owner/repo"
