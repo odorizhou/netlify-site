@@ -1,0 +1,6 @@
+## Install on VPS as: /etc/cron.d/kgsbot-stats
+#
+# Runs hourly, writes logs to /var/log/kgsbot-stats.log
+
+0 * * * * root ENV_FILE=/opt/kgsbot-stats/env /opt/kgsbot-stats/publish.sh >>/var/log/kgsbot-stats.log 2>&1
+
