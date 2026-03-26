@@ -1,6 +1,13 @@
 # Netlify configuration — https://docs.netlify.com/configure-builds/file-based-configuration/
 [build]
   publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/bots/:id/stats"
+  to = "/.netlify/functions/stats?botId=:id"
+  status = 200
+  force = true
 
 [[headers]]
   for = "/*"

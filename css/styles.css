@@ -15,7 +15,7 @@
   --border: rgba(255, 255, 255, 0.08);
   --font: "DM Sans", system-ui, sans-serif;
   --radius: 12px;
-  --shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 @media (prefers-color-scheme: light) {
@@ -26,8 +26,8 @@
     --muted: #5c6b7a;
     --accent: #0d7a4f;
     --accent-dim: #0a5c3c;
-    --border: rgba(0, 0, 0, 0.08);
-    --shadow: 0 16px 40px rgba(15, 20, 25, 0.08);
+    --border: rgba(0, 0, 0, 0.1);
+    --shadow: 0 10px 26px rgba(15, 20, 25, 0.08);
   }
 }
 
@@ -64,7 +64,7 @@ body {
 }
 
 .wrap {
-  width: min(56rem, calc(100% - 2rem));
+  width: min(72rem, calc(100% - 2rem));
   margin-inline: auto;
 }
 
@@ -91,24 +91,8 @@ body {
   letter-spacing: -0.02em;
 }
 
-.site-header nav {
-  display: flex;
-  gap: 1.25rem;
-}
-
-.site-header a {
-  color: var(--muted);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.site-header a:hover,
-.site-header a:focus-visible {
-  color: var(--text);
-}
-
 .hero {
-  padding: clamp(3rem, 10vw, 5rem) 0;
+  padding: clamp(2rem, 6vw, 3rem) 0 1rem;
 }
 
 .hero h1 {
@@ -119,10 +103,10 @@ body {
 }
 
 .lead {
-  margin: 0 0 1.75rem;
-  max-width: 38ch;
+  margin: 0 0 1.25rem;
+  max-width: 52ch;
   color: var(--muted);
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 .btn {
@@ -137,6 +121,8 @@ body {
   text-decoration: none;
   box-shadow: var(--shadow);
   transition: transform 0.15s ease, background 0.15s ease;
+  border: 0;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -150,15 +136,12 @@ body {
 }
 
 .panel {
-  padding: 0 0 4rem;
-}
-
-.panel .wrap {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: clamp(1.5rem, 4vw, 2.25rem);
   box-shadow: var(--shadow);
+  margin: 1rem 0 0;
 }
 
 .panel h2 {
@@ -166,26 +149,74 @@ body {
   font-size: 1.35rem;
 }
 
-.steps {
-  margin: 0;
-  padding-left: 1.25rem;
-  color: var(--muted);
+.controls {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.steps li {
-  margin-bottom: 0.75rem;
+.controls label {
+  display: block;
+  font-weight: 600;
 }
 
-.steps li:last-child {
-  margin-bottom: 0;
-}
-
-.steps code {
-  font-size: 0.95em;
-  padding: 0.15em 0.4em;
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--text) 8%, transparent);
+.controls input {
+  min-width: 12rem;
+  padding: 0.62rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
   color: var(--text);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.status-line {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 0.45rem;
+  white-space: nowrap;
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.is-empty {
+  color: var(--muted);
+  font-style: italic;
 }
 
 .site-footer {
