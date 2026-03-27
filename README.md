@@ -23,6 +23,8 @@ For the default template, create one JSON file per bot, for example:
 - `stats/gh200.json`
 - `stats/otherBotId.json`
 
+The production dropdown reads bot IDs from **`bots.json`** in this repo (static file). When you add a new bot, update **`bots.json`** and ensure a matching `stats/<botId>.json` exists in the private GitHub repo.
+
 These files must contain the JSON payload your frontend expects (e.g. fields like `by_day`, `by_rank_handicap`, `by_opponent`, `games`).
 The frontend also reads optional `top100_rank` and `top100_updated_at`.
 

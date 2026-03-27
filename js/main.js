@@ -377,24 +377,41 @@ function setSummaryLine(rank, gameCount, botId) {
   el.innerHTML = `The bot ranks ${rankText} on the <a href="https://www.gokgs.com/top100.jsp" target="_blank" rel="noreferrer">Top KGS 100 chart</a>. Stats based on ${gameCount} games for ${escapeHtml(botId)}.`;
 }
 
+const DEFAULT_BOT_IDS = ["gh200", "gh204"];
+
 async function fetchAvailableBotIds() {
-  if (!window.location.pathname.startsWith("/preview/")) {
-    return [state.botId || "gh204"];
+  if (window.location.pathname.startsWith("/preview/")) {
+    try {
+      const response = await fetch("/preview-data/publish/repo/stats/", { headers: { Accept: "text/html" } });
+      if (!response.ok) throw new Error(`list failed: ${response.status}`);
+      const html = await response.text();
+      const matches = [...html.matchAll(/href="([^"]+\.json)"/g)];
+      const ids = matches
+        .map((m) => decodeURIComponent(m[1]))
+        .map((name) => name.split("/").pop()?.replace(/\.json$/i, ""))
+        .filter(Boolean);
+      const uniq = [...new Set(ids)].sort((a, b) => a.localeCompare(b));
+      if (uniq.length) return uniq;
+    } catch {
+      /* fall through to bots.json */
+    }
   }
+
   try {
-    const response = await fetch("/preview-data/publish/repo/stats/", { headers: { Accept: "text/html" } });
-    if (!response.ok) throw new Error(`list failed: ${response.status}`);
-    const html = await response.text();
-    const matches = [...html.matchAll(/href="([^"]+\.json)"/g)];
-    const ids = matches
-      .map((m) => decodeURIComponent(m[1]))
-      .map((name) => name.split("/").pop()?.replace(/\.json$/i, ""))
-      .filter(Boolean);
-    const uniq = [...new Set(ids)].sort((a, b) => a.localeCompare(b));
-    return uniq.length ? uniq : [state.botId || "gh204"];
+    const response = await fetch("/bots.json", { cache: "no-store", headers: { Accept: "application/json" } });
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data) && data.length) {
+        return [...new Set(data.map((id) => String(id).trim()).filter(Boolean))].sort((a, b) =>
+          a.localeCompare(b)
+        );
+      }
+    }
   } catch {
-    return [state.botId || "gh204"];
+    /* use defaults */
   }
+
+  return [...DEFAULT_BOT_IDS];
 }
 
 function populateBotSelect(botIds) {
