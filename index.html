@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Public KGS bot stats dashboard" />
     <title>KGS Bot Public Stats</title>
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body data-stats-endpoint="/.netlify/functions/stats">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap">
@@ -22,14 +22,28 @@
     </header>
     <main id="main" class="wrap">
       <section class="hero">
-        <h1>Public Stats Dashboard</h1>
-        <p class="lead">
-          A self-contained public view of monitor stats (by day, by rank and handicap,
-          and by opponent).
+        <h2 class="section-title">Intro</h2>
+        <div class="lead intro">
+          <p>
+            This page shows game stats of custom KataGo Bots based on v1.16.4 with 18 block
+            NN trained on handicap games.
+          </p>
+          <p>
+            The bots play on
+            <a href="https://www.gokgs.com" target="_blank" rel="noreferrer">KGS server</a>,
+            accepting 2 stone to 7 stone handicap games against human players ranked from 5k to
+            7d with time setting of 15 min + 5x30s.
+          </p>
+        </div>
+        <p class="status-line feedback-line">
+          Feedback welcome:
+          <a href="mailto:odorizhou@gmail.com">odorizhou@gmail.com</a>
         </p>
+        <hr class="section-break" />
+        <h2 class="section-title">Game Stats</h2>
         <form id="controls" class="controls" aria-label="Stats controls">
-          <label for="botIdInput">Bot ID</label>
-          <input id="botIdInput" name="botId" type="text" value="gh204" autocomplete="off" />
+          <label for="botIdSelect">Bot ID</label>
+          <select id="botIdSelect" name="botId"></select>
           <button class="btn" type="submit">Load stats</button>
           <button class="btn btn-secondary" type="button" id="refreshBtn">Refresh</button>
         </form>
@@ -39,7 +53,7 @@
       <section class="panel">
         <h2>By Day</h2>
         <div class="table-wrap">
-          <table>
+          <table id="byDayTable">
             <thead>
               <tr>
                 <th>Date</th>
@@ -57,7 +71,7 @@
       <section class="panel">
         <h2>By Rank and Handicap</h2>
         <div class="table-wrap">
-          <table>
+          <table id="byRankTable">
             <thead>
               <tr>
                 <th>Rank</th>
@@ -75,7 +89,7 @@
       <section class="panel">
         <h2>By Opponent</h2>
         <div class="table-wrap">
-          <table>
+          <table id="byOpponentTable">
             <thead>
               <tr>
                 <th>Opponent</th>
@@ -96,6 +110,6 @@
         <p>Last updated: <span id="lastUpdated">-</span> · <span id="year"></span></p>
       </div>
     </footer>
-    <script src="/js/main.js" defer></script>
+    <script src="js/main.js" defer></script>
   </body>
 </html>

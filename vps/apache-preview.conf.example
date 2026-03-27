@@ -1,0 +1,29 @@
+# Apache example for exposing preview at :6006/preview
+# while preserving an existing production monitor at :6006/monitor.
+#
+# Required modules:
+#   a2enmod proxy proxy_http rewrite headers
+#
+# Drop into your vhost that serves port 6006, then reload apache.
+
+# Keep existing monitor mapping (leave your current target untouched).
+# If you already have these lines, do not duplicate them.
+ProxyPass        /monitor  http://127.0.0.1:6006/monitor
+ProxyPassReverse /monitor  http://127.0.0.1:6006/monitor
+
+# Optional: if monitor API is exposed under /monitor/api, keep it available.
+# ProxyPass        /monitor/api  http://127.0.0.1:6006/monitor/api
+# ProxyPassReverse /monitor/api  http://127.0.0.1:6006/monitor/api
+
+# Redirect /preview -> /preview/ for correct relative asset resolution.
+RedirectMatch 302 ^/preview$ /preview/
+
+# Preview app (run locally, e.g. python3 -m http.server 4173).
+# /preview/* will map to the preview server root.
+ProxyPass        /preview/  http://127.0.0.1:4173/
+ProxyPassReverse /preview/  http://127.0.0.1:4173/
+
+# Optional hardening for preview endpoint.
+<Location /preview/>
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+</Location>

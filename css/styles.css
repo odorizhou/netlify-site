@@ -6,7 +6,7 @@
 
 :root {
   color-scheme: light dark;
-  --bg: #0f1419;
+  --bg: #20262d;
   --bg-elevated: #1a222c;
   --text: #e7ecf1;
   --muted: #9aa8b4;
@@ -42,8 +42,7 @@ body {
   font-size: 1.0625rem;
   line-height: 1.6;
   color: var(--text);
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(62, 207, 142, 0.12), transparent),
-    radial-gradient(800px 400px at 90% 0%, rgba(100, 149, 237, 0.1), transparent), var(--bg);
+  background: var(--bg);
 }
 
 .skip-link {
@@ -69,9 +68,9 @@ body {
 }
 
 .site-header {
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(8px);
-  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border-bottom: 0;
+  backdrop-filter: none;
+  background: var(--bg);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -93,6 +92,22 @@ body {
 
 .hero {
   padding: clamp(2rem, 6vw, 3rem) 0 1rem;
+  font-size: 1.18rem;
+}
+
+.section-title {
+  margin: 0 0 0.7rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.section-break {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 34%, transparent);
+  margin: 0.8rem 0 0.9rem;
 }
 
 .hero h1 {
@@ -104,9 +119,18 @@ body {
 
 .lead {
   margin: 0 0 1.25rem;
-  max-width: 52ch;
+  max-width: none;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 1.28rem;
+  line-height: 1.55;
+}
+
+.intro p {
+  margin: 0 0 0.6rem;
+}
+
+.intro a {
+  color: var(--accent);
 }
 
 .btn {
@@ -159,6 +183,7 @@ body {
 .controls label {
   display: block;
   font-weight: 600;
+  font-size: 1.15rem;
 }
 
 .controls input {
@@ -168,6 +193,16 @@ body {
   border: 1px solid var(--border);
   background: var(--bg-elevated);
   color: var(--text);
+}
+
+.controls select {
+  min-width: 12rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 1.08rem;
 }
 
 .btn-secondary {
@@ -184,7 +219,54 @@ body {
 .status-line {
   margin: 0.8rem 0 0;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 1.18rem;
+  white-space: nowrap;
+}
+
+.feedback-line {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.feedback-line a {
+  font-weight: 600;
+}
+
+/* Win-rate heat: greens (high) → yellow → orange → reds (low) */
+.cell-wr-g5 {
+  background: rgba(34, 139, 69, 0.42);
+}
+
+.cell-wr-g4 {
+  background: rgba(46, 160, 67, 0.32);
+}
+
+.cell-wr-g3 {
+  background: rgba(56, 178, 86, 0.26);
+}
+
+.cell-wr-g2 {
+  background: rgba(72, 199, 116, 0.22);
+}
+
+.cell-wr-g1 {
+  background: rgba(110, 231, 156, 0.18);
+}
+
+.cell-wr-y {
+  background: rgba(214, 158, 46, 0.28);
+}
+
+.cell-wr-o {
+  background: rgba(217, 119, 87, 0.26);
+}
+
+.cell-wr-r2 {
+  background: rgba(214, 69, 69, 0.28);
+}
+
+.cell-wr-r3 {
+  background: rgba(180, 35, 35, 0.38);
 }
 
 .table-wrap {
@@ -217,6 +299,28 @@ tbody tr:last-child td {
 .is-empty {
   color: var(--muted);
   font-style: italic;
+}
+
+.details-toggle {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.details-row td {
+  white-space: normal;
+}
+
+.details-card {
+  padding: 0.85rem 0.25rem 0.25rem;
+}
+
+.details-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
 }
 
 .site-footer {

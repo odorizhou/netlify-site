@@ -1,6 +1,9 @@
 ## Install on VPS as: /etc/cron.d/kgsbot-stats
 #
 # Runs hourly, writes logs to /var/log/kgsbot-stats.log
+#
+# env file sets BOT_ID for the primary bot (e.g. gh204).
+# For additional bots, set PUBLISH_BOT_ID for each extra run.
 
 0 * * * * root ENV_FILE=/opt/kgsbot-stats/env /opt/kgsbot-stats/publish.sh >>/var/log/kgsbot-stats.log 2>&1
-
+10 * * * * root ENV_FILE=/opt/kgsbot-stats/env PUBLISH_BOT_ID=gh200 /opt/kgsbot-stats/publish.sh >>/var/log/kgsbot-stats.log 2>&1
