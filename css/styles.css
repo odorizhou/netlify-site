@@ -220,7 +220,25 @@ body {
   margin: 0.8rem 0 0;
   color: var(--muted);
   font-size: 1.18rem;
-  white-space: nowrap;
+  white-space: normal;
+}
+
+.by-day-nav {
+  margin-bottom: 0.75rem;
+}
+
+.month-heading-row td {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border-bottom: 1px solid var(--border);
+  padding-top: 0.85rem;
+  padding-bottom: 0.5rem;
+}
+
+.month-heading {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .feedback-line {
@@ -292,6 +310,11 @@ th {
   font-weight: 600;
 }
 
+thead tr:nth-child(2) th {
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+
 tbody tr:last-child td {
   border-bottom: 0;
 }
@@ -323,6 +346,14 @@ tbody tr:last-child td {
   font-size: 1rem;
 }
 
+.details-card .table-wrap table {
+  font-size: 0.9rem;
+}
+
+.details-card .table-wrap th {
+  font-size: 0.85rem;
+}
+
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 1.5rem 0;
@@ -332,4 +363,135 @@ tbody tr:last-child td {
 
 .site-footer p {
   margin: 0;
+}
+
+/* Mobile / small screens: smaller type & tighter spacing so stat tables fit without horizontal scroll. */
+@media (max-width: 720px) {
+  body {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    width: calc(100% - 1rem);
+  }
+
+  .site-header .wrap {
+    padding: 0.65rem 0;
+  }
+
+  .hero {
+    font-size: 1.05rem;
+    padding: 1.35rem 0 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin: 0 0 0.55rem;
+  }
+
+  .section-break {
+    margin: 0.55rem 0 0.65rem;
+  }
+
+  .lead {
+    font-size: 1.08rem;
+    margin: 0 0 0.9rem;
+  }
+
+  .panel {
+    padding: 0.85rem 0.6rem;
+    margin: 0.65rem 0 0;
+    border-radius: 10px;
+  }
+
+  .panel h2 {
+    font-size: 1.12rem;
+    margin: 0 0 0.6rem;
+  }
+
+  .controls {
+    gap: 0.45rem;
+    row-gap: 0.55rem;
+  }
+
+  .controls label {
+    font-size: 0.92rem;
+  }
+
+  .controls select,
+  .controls input {
+    min-width: 0;
+    max-width: 100%;
+    padding: 0.48rem 0.5rem;
+    font-size: 0.92rem;
+  }
+
+  .btn {
+    padding: 0.48rem 0.85rem;
+    font-size: 0.88rem;
+  }
+
+  .status-line {
+    font-size: 0.92rem;
+    margin: 0.55rem 0 0;
+  }
+
+  .by-day-nav {
+    margin-bottom: 0.45rem;
+  }
+
+  .month-heading-row td {
+    padding: 0.45rem 0.35rem;
+  }
+
+  .month-heading {
+    font-size: 0.95rem;
+  }
+
+  table {
+    font-size: 0.7rem;
+  }
+
+  th,
+  td {
+    padding: 0.26rem 0.18rem;
+  }
+
+  thead tr:nth-child(2) th {
+    font-size: 0.66rem;
+  }
+
+  .table-wrap {
+    /* Narrower intrinsic width from font/padding; keep scroll as fallback on tiny screens */
+    margin-inline: 0;
+  }
+
+  .details-toggle {
+    padding: 0.18rem 0.4rem;
+    font-size: 0.72rem;
+  }
+
+  .details-card {
+    padding: 0.55rem 0.1rem 0.1rem;
+  }
+
+  .details-card h3 {
+    font-size: 0.88rem;
+    margin: 0 0 0.45rem;
+  }
+
+  .details-card .table-wrap table {
+    font-size: 0.66rem;
+  }
+
+  .details-card .table-wrap th {
+    font-size: 0.62rem;
+  }
+
+  .site-footer {
+    padding: 1rem 0;
+    font-size: 0.82rem;
+  }
 }

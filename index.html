@@ -44,23 +44,33 @@
         <form id="controls" class="controls" aria-label="Stats controls">
           <label for="botIdSelect">Bot ID</label>
           <select id="botIdSelect" name="botId"></select>
+          <label for="statsDisplayMode">Show</label>
+          <select id="statsDisplayMode" name="statsDisplayMode" aria-label="Show win-loss counts or win rates in tables">
+            <option value="wl">W/L counts</option>
+            <option value="rate">Win rate</option>
+          </select>
           <button class="btn" type="submit">Load stats</button>
           <button class="btn btn-secondary" type="button" id="refreshBtn">Refresh</button>
         </form>
         <p id="statusLine" class="status-line" role="status" aria-live="polite">Loading...</p>
       </section>
 
-      <section class="panel">
+      <section class="panel" id="by-day-panel">
         <h2>By Day</h2>
+        <div class="by-day-nav controls" id="byDayMonthNav" hidden>
+          <label for="byDayNavYear">Filter by year</label>
+          <select id="byDayNavYear" aria-label="Filter by day table by year"></select>
+          <label for="byDayNavMonth">Month</label>
+          <select id="byDayNavMonth" aria-label="Filter by day table by month" disabled></select>
+        </div>
         <div class="table-wrap">
           <table id="byDayTable">
             <thead>
               <tr>
                 <th>Date</th>
                 <th>Games</th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Win Rate</th>
+                <th colspan="2">W/L &amp; win rate</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody id="byDayBody"></tbody>
@@ -76,9 +86,8 @@
               <tr>
                 <th>Rank</th>
                 <th>Games</th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Win Rate</th>
+                <th colspan="2">W/L &amp; win rate</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody id="byRankBody"></tbody>
@@ -95,9 +104,8 @@
                 <th>Opponent</th>
                 <th>Rank</th>
                 <th>Games</th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Win Rate</th>
+                <th colspan="2">W/L &amp; win rate</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody id="byOpponentBody"></tbody>
