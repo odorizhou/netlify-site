@@ -1,29 +1,19 @@
-# Apache example for exposing preview at :6006/preview
-# while preserving an existing production monitor at :6006/monitor.
+# Netlify /preview on Apache (same vhost as /monitor, different paths)
 #
-# Required modules:
-#   a2enmod proxy proxy_http rewrite headers
+# Canonical setup lives in this repo:
+#   - vps/katago-web-app-port6006.conf — VirtualHost *:6006 with:
+#       IncludeOptional /etc/apache2/katago-vhost.d/preview.conf
+#   - vps/apache-preview-enable.conf — copy of that optional fragment (Alias
+#     /preview-data/…, ProxyPass /preview/ → 127.0.0.1:4173)
 #
-# Drop into your vhost that serves port 6006, then reload apache.
-
-# Keep existing monitor mapping (leave your current target untouched).
-# If you already have these lines, do not duplicate them.
-ProxyPass        /monitor  http://127.0.0.1:6006/monitor
-ProxyPassReverse /monitor  http://127.0.0.1:6006/monitor
-
-# Optional: if monitor API is exposed under /monitor/api, keep it available.
-# ProxyPass        /monitor/api  http://127.0.0.1:6006/monitor/api
-# ProxyPassReverse /monitor/api  http://127.0.0.1:6006/monitor/api
-
-# Redirect /preview -> /preview/ for correct relative asset resolution.
-RedirectMatch 302 ^/preview$ /preview/
-
-# Preview app (run locally, e.g. python3 -m http.server 4173).
-# /preview/* will map to the preview server root.
-ProxyPass        /preview/  http://127.0.0.1:4173/
-ProxyPassReverse /preview/  http://127.0.0.1:4173/
-
-# Optional hardening for preview endpoint.
-<Location /preview/>
-  Header always set X-Robots-Tag "noindex, nofollow, noarchive"
-</Location>
+# Toggle Apache routes (install/remove fragment + graceful reload):
+#   sudo ./vps/preview-apache.sh on
+#   sudo ./vps/preview-apache.sh off
+#   ./vps/preview-apache.sh status
+#
+# Start/stop the static file server the proxy targets:
+#   ./vps/preview-server.sh start
+#   ./vps/preview-server.sh stop
+#
+# Required modules: proxy, proxy_http. Do not point /monitor at :6006 (proxy loop).
+# Full /monitor example: see vps/katago-web-app-port6006.conf

@@ -397,8 +397,9 @@ async function fetchAvailableBotIds() {
     }
   }
 
+  const botsPath = window.location.pathname.startsWith("/preview/") ? "/preview/bots.json" : "/bots.json";
   try {
-    const response = await fetch("/bots.json", { cache: "no-store", headers: { Accept: "application/json" } });
+    const response = await fetch(botsPath, { cache: "no-store", headers: { Accept: "application/json" } });
     if (response.ok) {
       const data = await response.json();
       if (Array.isArray(data) && data.length) {
